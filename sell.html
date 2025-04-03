@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sell Your Notes - NotesMarket</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .file-upload {
+      border: 2px dashed #d1d5db;
+      transition: all 0.3s ease;
+    }
+    .file-upload:hover {
+      border-color: #6366f1;
+    }
+    .file-upload.dragover {
+      border-color: #6366f1;
+      background-color: #f0f4ff;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gray-50">
+  <!-- Header -->
+  <div id="header"></div>
+
+  <!-- Main Content -->
+  <main class="flex-grow">
+    <!-- Sell Hero -->
+    <section class="bg-indigo-700">
+      <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+          Sell Your Notes
+        </h1>
+        <p class="mt-6 max-w-3xl mx-auto text-xl text-indigo-100">
+          Earn money by sharing your handwritten notes with students worldwide
+        </p>
+      </div>
+    </section>
+
+    <!-- Sell Form -->
+    <section class="py-12">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white shadow rounded-lg overflow-hidden">
+          <div class="px-6 py-5 border-b border-gray-200 bg-white">
+            <h3 class="text-lg font-medium leading-6 text-gray-900">Note Details</h3>
+            <p class="mt-1 text-sm text-gray-500">Fill in all required fields to list your notes for sale</p>
+          </div>
+          <div class="px-6 py-6">
+            <form id="sellForm" class="space-y-6">
+              <!-- Title -->
+              <div>
+                <label for="title" class="block text-sm font-medium text-gray-700">Note Title *</label>
+                <div class="mt-1">
+                  <input type="text" name="title" id="title" required class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="e.g. Organic Chemistry Lecture Notes">
+                </div>
+                <p class="mt-2 text-sm text-gray-500">Be descriptive but concise (max 100 characters)</p>
+              </div>
+
+              <!-- Subject/Category -->
+              <div>
+                <label for="subject" class="block text-sm font-medium text-gray-700">Subject/Category *</label>
+                <div class="mt-1">
+                  <select id="subject" name="subject" required class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    <option value="">Select a subject</option>
+                    <option value="science">Science</option>
+                    <option value="mathematics">Mathematics</option>
+                    <option value="literature">Literature</option>
+                    <option value="history">History</option>
+                    <option value="business">Business</option>
+                    <option value="engineering">Engineering</option>
+                    <option value="medicine">Medicine</option>
+                    <option value="law">Law</option>
+                    <option value="arts">Arts</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Subcategory -->
+              <div id="subcategoryContainer" class="hidden">
+                <label for="subcategory" class="block text-sm font-medium text-gray-700">Subcategory</label>
+                <div class="mt-1">
+                  <select id="subcategory" name="subcategory" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    <option value="">Select a subcategory</option>
+                    <!-- Subcategories will be populated via JavaScript -->
+                  </select>
+                </div>
+              </div>
+
+              <!-- Course/Class -->
+              <div>
+                <label for="course" class="block text-sm font-medium text-gray-700">Course/Class Name (Optional)</label>
+                <div class="mt-1">
+                  <input type="text" name="course" id="course" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="e.g. CHEM 101 - Organic Chemistry">
+                </div>
+              </div>
+
+              <!-- Institution -->
+              <div>
+                <label for="institution" class="block text-sm font-medium text-gray-700">Institution (Optional)</label>
+                <div class="mt-1">
+                  <input type="text" name="institution" id="institution" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="e.g. Harvard University">
+                </div>
+              </div>
+
+              <!-- Description -->
+              <div>
+                <label for="description" class="block text-sm font-medium text-gray-700">Description *</label>
+                <div class="mt-1">
+                  <textarea id="description" name="description" rows="4" required class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Describe your notes in detail (content covered, special features, etc.)"></textarea>
+                </div>
+                <p class="mt-2 text-sm text-gray-500">Minimum 50 characters, maximum 1000 characters</p>
+              </div>
+
+              <!-- Price -->
+              <div>
+                <label for="price" class="block text-sm font-medium text-gray-700">Price *</label>
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span class="text-gray-500 sm:text-sm">$</span>
+                  </div>
+                  <input type="number" name="price" id="price" min="1" max="100" step="0.01" required class="block w-full pl-7 pr-12 py-2 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="0.00">
+                  <div class="absolute inset-y-0 right-0 flex items-center">
+                    <label for="currency" class="sr-only">Currency</label>
+                    <select id="currency" name="currency" class="h-full rounded-r-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                      <option>USD</option>
+                      <option>EUR</option>
+                      <option>GBP</option>
+                    </select>
+                  </div>
+                </div>
+                <p class="mt-2 text-sm text-gray-500">Recommended price range: $5-$20. You'll earn 80% of each sale.</p>
+              </div>
+
+              <!-- File Upload -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Upload Notes *</label>
+                <div id="fileUpload" class="file-upload mt-1 flex justify-center px-6 pt-5 pb-6 border-2 rounded-md">
+                  <div class="space-y-1 text-center">
+                    <div class="flex text-sm text-gray-600 justify-center">
+                      <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                        <span>Upload a file</span>
+                        <input id="file-upload" name="file-upload" type="file" class="sr-only" accept=".pdf,.jpg,.jpeg,.png" required>
+                      </label>
+                    </div>
+                    <p class="text-xs text-gray-500">PDF, JPG, or PNG up to 10MB</p>
+                    <p id="fileName" class="text-sm font-medium text-gray-900 hidden"></p>
+                    <div id="fileError" class="text-sm text-red-600 hidden"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Preview Image -->
+              <div id="previewContainer" class="hidden">
+                <label class="block text-sm font-medium text-gray-700">Preview Image</label>
+                <div class="mt-1">
+                  <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                      <img id="previewImage" class="h-16 w-16 rounded-md object-cover" src="" alt="Preview">
+                    </div>
+                    <div>
+                      <button type="button" id="changePreview" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">Change</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Terms -->
+              <div class="flex items-start">
+                <div class="flex items-center h-5">
+                  <input id="terms" name="terms" type="checkbox" required class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                </div>
+                <div class="ml-3 text-sm">
+                  <label for="terms" class="font-medium text-gray-700">I agree to the <a href="#" class="text-indigo-600 hover:text-indigo-500">Terms of Service</a> and <a href="#" class="text-indigo-600 hover:text-indigo-500">Content Guidelines</a></label>
+                  <p class="text-gray-500">By checking this box, you confirm these are your original notes and don't violate any copyrights.</p>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="pt-5">
+                <div class="flex justify-end">
+                  <button type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Cancel
+                  </button>
+                  <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    List for Sale
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script>
+    // Load header and footer components
+    fetch('components/header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header').innerHTML = data;
+      });
+
+    fetch('components/footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer').innerHTML = data;
+      });
+
+    // Subject subcategory mapping
+    const subcategories = {
+      science: ['Biology', 'Chemistry', 'Physics', 'Astronomy', 'Geology'],
+      mathematics: ['Algebra', 'Calculus', 'Statistics', 'Geometry', 'Discrete Math'],
+      literature: ['American', 'British', 'World', 'Classical', 'Modern'],
+      history: ['European', 'American', 'Ancient', 'Medieval', 'Modern'],
+      business: ['Finance', 'Marketing', 'Management', 'Accounting', 'Economics'],
+      engineering: ['Mechanical', 'Electrical', 'Civil', 'Computer', 'Chemical'],
+      medicine: ['Anatomy', 'Pharmacology', 'Pathology', 'Physiology', 'Biochemistry'],
+      law: ['Constitutional', 'Criminal', 'Contract', 'Property', 'Tort'],
+      arts: ['Art History', 'Music', 'Theater', 'Dance', 'Film']
+    };
+
+    // Subject change handler
+    document.getElementById('subject').addEventListener('change', function() {
+      const subject = this.value;
+      const subcategoryContainer = document.getElementById('subcategoryContainer');
+      const subcategorySelect = document.getElementById('subcategory');
+      
+      // Clear existing options
+      subcategorySelect.innerHTML = '<option value="">Select a subcategory</option>';
+      
+      if (subject && subject !== 'other' && subcategories[subject]) {
+        // Add new options
+        subcategories[subject].forEach(sub => {
+          const option = document.createElement('option');
+          option.value = sub.toLowerCase();
+          option.textContent = sub;
+          subcategorySelect.appendChild(option);
+        });
+        subcategoryContainer.classList.remove('hidden');
+      } else {
+        subcategoryContainer.classList.add('hidden');
+      }
+    });
+
+    // File upload handling
+    const fileUpload = document.getElementById('fileUpload');
+    const fileInput = document.getElementById('file-upload');
+    const fileName = document.getElementById('fileName');
+    const fileError = document.getElementById('fileError');
+    const previewContainer = document.getElementById('previewContainer');
+    const previewImage = document.getElementById('previewImage');
+    const changePreview = document.getElementById('changePreview');
+
+    // Drag and drop events
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+      fileUpload.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+      fileUpload.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      fileUpload.addEventListener(eventName, unhighlight, false);
+    });
+
+    function highlight() {
+      fileUpload.classList.add('dragover');
+    }
+
+    function unhighlight() {
+      fileUpload.classList.remove('dragover');
+    }
+
+    fileUpload.addEventListener('drop', handleDrop, false);
+
+    function handleDrop(e) {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+      handleFiles(files);
+    }
+
+    fileInput.addEventListener('change', function() {
+      handleFiles(this.files);
+    });
+
+    function handleFiles(files) {
+      if (files.length > 0) {
+        const file = files[0];
+        const validTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+        const maxSize = 10 * 1024 * 1024; // 10MB
+
+        if (!validTypes.includes(file.type)) {
+          fileError.textContent = 'Invalid file type. Please upload a PDF, JPG, or PNG file.';
+          fileError.classList.remove('hidden');
+          fileName.classList.add('hidden');
+          return;
+        }
+
+        if (file.size > maxSize) {
+          fileError.textContent = 'File is too large. Maximum size is 10MB.';
+          fileError.classList.remove('hidden');
+          fileName.classList.add('hidden');
+          return;
+        }
+
+        // Valid file
+        fileError.classList.add('hidden');
+        fileName.textContent = file.name;
+        fileName.classList.remove('hidden');
+
+        // If image, show preview
+        if (file.type.includes('image')) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            previewImage.src = e.target.result;
+            previewContainer.classList.remove('hidden');
+          };
+          reader.readAsDataURL(file);
+        } else {
+          previewContainer.classList.add('hidden');
+        }
+      }
+    }
+
+    changePreview.addEventListener('click', function() {
+      fileInput.value = '';
+      fileName.textContent = '';
+      fileName.classList.add('hidden');
+      previewContainer.classList.add('hidden');
+    });
+
+    // Form submission
+    document.getElementById('sellForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Here you would normally send the form data to your server
+      alert('Your notes have been submitted for review! You will be notified when they are approved and listed for sale.');
+      this.reset();
+      fileName.classList.add('hidden');
+      previewContainer.classList.add('hidden');
+      document.getElementById('subcategoryContainer').classList.add('hidden');
+    });
+  </script>
+</body>
+</html>
