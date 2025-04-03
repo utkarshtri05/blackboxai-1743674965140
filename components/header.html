@@ -1,0 +1,87 @@
+<header class="bg-white shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <!-- Logo -->
+      <div class="flex-shrink-0 flex items-center">
+        <a href="index.html" class="flex items-center">
+          <i class="fas fa-book-open text-indigo-600 text-2xl"></i>
+          <span class="ml-2 text-xl font-bold text-gray-900">NotesMarket</span>
+        </a>
+      </div>
+      
+      <!-- Desktop Navigation -->
+      <nav class="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-8">
+        <a href="index.html" class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+          Home
+        </a>
+        <a href="buy.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+          Buy Notes
+        </a>
+        <a href="sell.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+          Sell Notes
+        </a>
+        <a href="pricing.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+          Pricing
+        </a>
+        <a href="about.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+          About
+        </a>
+        <a href="contact.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+          Contact
+        </a>
+      </nav>
+
+      <!-- User Actions -->
+      <div class="hidden sm:ml-6 sm:flex sm:items-center">
+        <a href="login.html" class="border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+          Sign In
+        </a>
+        <span class="mx-2 text-gray-400">/</span>
+        <a href="register.html" class="border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+          Register
+        </a>
+        <button class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          Upload Notes
+        </button>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="-mr-2 flex items-center sm:hidden">
+        <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="sm:hidden hidden" id="mobile-menu">
+    <div class="pt-2 pb-3 space-y-1">
+      <a href="index.html" class="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Home</a>
+      <a href="buy.html" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Buy Notes</a>
+      <a href="sell.html" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Sell Notes</a>
+      <a href="pricing.html" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Pricing</a>
+      <a href="about.html" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">About</a>
+      <a href="contact.html" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Contact</a>
+    </div>
+    <div class="pt-4 pb-3 border-t border-gray-200">
+      <div class="space-y-1">
+        <a href="login.html" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">Sign In</a>
+        <a href="register.html" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">Register</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  document.querySelector('[aria-controls="mobile-menu"]').addEventListener('click', function() {
+    const menu = document.getElementById('mobile-menu');
+    if (menu.classList.contains('hidden')) {
+      menu.classList.remove('hidden');
+    } else {
+      menu.classList.add('hidden');
+    }
+  });
+</script>
