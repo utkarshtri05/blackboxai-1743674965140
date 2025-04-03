@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - NotesMarket</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .contact-icon {
+      transition: all 0.3s ease;
+    }
+    .contact-card:hover .contact-icon {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gray-50">
+  <!-- Header -->
+  <div id="header"></div>
+
+  <!-- Main Content -->
+  <main class="flex-grow">
+    <!-- Contact Hero -->
+    <section class="bg-indigo-700">
+      <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+          Contact Us
+        </h1>
+        <p class="mt-6 max-w-3xl mx-auto text-xl text-indigo-100">
+          We're here to help with any questions or issues
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Options -->
+    <section class="py-12 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- Email Card -->
+          <div class="contact-card bg-white overflow-hidden shadow rounded-lg transition-all duration-200 hover:shadow-lg">
+            <div class="px-4 py-5 sm:p-6">
+              <div class="flex items-center justify-center">
+                <div class="flex-shrink-0 bg-indigo-100 rounded-full p-4">
+                  <div class="contact-icon">
+                    <i class="fas fa-envelope text-indigo-600 text-2xl"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-6 text-center">
+                <h3 class="text-lg font-medium text-gray-900">Email Us</h3>
+                <p class="mt-2 text-sm text-gray-500">
+                  Typically responds within 24 hours
+                </p>
+                <p class="mt-2 text-base font-medium text-indigo-600">
+                  support@notesmarket.com
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Card -->
+          <div class="contact-card bg-white overflow-hidden shadow rounded-lg transition-all duration-200 hover:shadow-lg">
+            <div class="px-4 py-5 sm:p-6">
+              <div class="flex items-center justify-center">
+                <div class="flex-shrink-0 bg-indigo-100 rounded-full p-4">
+                  <div class="contact-icon">
+                    <i class="fas fa-comment-dots text-indigo-600 text-2xl"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-6 text-center">
+                <h3 class="text-lg font-medium text-gray-900">Live Chat</h3>
+                <p class="mt-2 text-sm text-gray-500">
+                  Available 9am-9pm EST, 7 days a week
+                </p>
+                <button class="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  Start Chat
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone Card -->
+          <div class="contact-card bg-white overflow-hidden shadow rounded-lg transition-all duration-200 hover:shadow-lg">
+            <div class="px-4 py-5 sm:p-6">
+              <div class="flex items-center justify-center">
+                <div class="flex-shrink-0 bg-indigo-100 rounded-full p-4">
+                  <div class="contact-icon">
+                    <i class="fas fa-phone-alt text-indigo-600 text-2xl"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-6 text-center">
+                <h3 class="text-lg font-medium text-gray-900">Call Us</h3>
+                <p class="mt-2 text-sm text-gray-500">
+                  Monday-Friday, 9am-5pm EST
+                </p>
+                <p class="mt-2 text-base font-medium text-indigo-600">
+                  (800) 555-0199
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="py-12 bg-gray-50">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white shadow rounded-lg overflow-hidden">
+          <div class="px-6 py-5 border-b border-gray-200 bg-white">
+            <h3 class="text-lg font-medium leading-6 text-gray-900">Send us a message</h3>
+            <p class="mt-1 text-sm text-gray-500">We'll get back to you as soon as possible</p>
+          </div>
+          <div class="px-6 py-6">
+            <form id="contactForm" class="space-y-6">
+              <!-- Name -->
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Full Name *</label>
+                <div class="mt-1">
+                  <input type="text" name="name" id="name" required class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email Address *</label>
+                <div class="mt-1">
+                  <input type="email" name="email" id="email" required class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                </div>
+              </div>
+
+              <!-- Subject -->
+              <div>
+                <label for="subject" class="block text-sm font-medium text-gray-700">Subject *</label>
+                <div class="mt-1">
+                  <select id="subject" name="subject" required class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    <option value="">Select a subject</option>
+                    <option value="support">Support</option>
+                    <option value="sales">Sales Inquiry</option>
+                    <option value="partnership">Partnership</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Message -->
+              <div>
+                <label for="message" class="block text-sm font-medium text-gray-700">Message *</label>
+                <div class="mt-1">
+                  <textarea id="message" name="message" rows="4" required class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
+                </div>
+              </div>
+
+              <!-- File Attachment -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Attachment (Optional)</label>
+                <div class="mt-1 flex items-center">
+                  <label for="attachment" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <i class="fas fa-paperclip mr-2"></i>
+                    Choose File
+                    <input id="attachment" name="attachment" type="file" class="sr-only">
+                  </label>
+                  <span id="file-chosen" class="ml-2 text-sm text-gray-500">No file chosen</span>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="pt-5">
+                <div class="flex justify-end">
+                  <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Send Message
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Link -->
+    <section class="py-12 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
+          Have a quick question?
+        </h2>
+        <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+          Check out our <a href="pricing.html#faq" class="text-indigo-600 hover:text-indigo-500">FAQ section</a> for quick answers to common questions.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script>
+    // Load header and footer components
+    fetch('components/header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header').innerHTML = data;
+      });
+
+    fetch('components/footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer').innerHTML = data;
+      });
+
+    // File attachment display
+    const fileInput = document.getElementById('attachment');
+    const fileChosen = document.getElementById('file-chosen');
+
+    fileInput.addEventListener('change', function() {
+      if (this.files.length > 0) {
+        fileChosen.textContent = this.files[0].name;
+      } else {
+        fileChosen.textContent = 'No file chosen';
+      }
+    });
+
+    // Form submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Here you would normally send the form data to your server
+      alert('Thank you for your message! We will get back to you soon.');
+      this.reset();
+      fileChosen.textContent = 'No file chosen';
+    });
+  </script>
+</body>
+</html>
