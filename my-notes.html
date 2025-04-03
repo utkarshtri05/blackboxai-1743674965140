@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Notes - NotesMarket</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .sidebar {
+      transition: all 0.3s ease;
+    }
+    .sidebar-item:hover {
+      background-color: #f3f4f6;
+    }
+    .sidebar-item.active {
+      background-color: #e5e7eb;
+      border-left: 4px solid #6366f1;
+    }
+    .note-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      z-index: 1;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gray-100">
+  <!-- Header -->
+  <div id="header"></div>
+
+  <!-- Main Content -->
+  <div class="flex flex-col md:flex-row">
+    <!-- Sidebar -->
+    <div class="sidebar w-full md:w-64 bg-white shadow-sm md:min-h-screen">
+      <div class="px-4 py-6">
+        <div class="flex items-center space-x-3">
+          <div class="flex-shrink-0">
+            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="User profile">
+          </div>
+          <div>
+            <p class="text-sm font-medium text-gray-700">John Doe</p>
+            <p class="text-xs text-gray-500">Premium Seller</p>
+          </div>
+        </div>
+      </div>
+      <nav class="mt-6 px-2">
+        <a href="dashboard.html" class="sidebar-item group flex items-center px-2 py-3 text-sm font-medium rounded-md">
+          <i class="fas fa-tachometer-alt text-gray-500 mr-3 text-lg"></i>
+          Dashboard
+        </a>
+        <a href="sell.html" class="sidebar-item group flex items-center px-2 py-3 text-sm font-medium rounded-md">
+          <i class="fas fa-upload text-gray-500 mr-3 text-lg"></i>
+          Upload Notes
+        </a>
+        <a href="#" class="sidebar-item active group flex items-center px-2 py-3 text-sm font-medium rounded-md">
+          <i class="fas fa-book text-gray-500 mr-3 text-lg"></i>
+          My Notes
+        </a>
+        <a href="#" class="sidebar-item group flex items-center px-2 py-3 text-sm font-medium rounded-md">
+          <i class="fas fa-shopping-cart text-gray-500 mr-3 text-lg"></i>
+          Purchases
+        </a>
+        <a href="#" class="sidebar-item group flex items-center px-2 py-3 text-sm font-medium rounded-md">
+          <i class="fas fa-chart-line text-gray-500 mr-3 text-lg"></i>
+          Earnings
+        </a>
+        <a href="#" class="sidebar-item group flex items-center px-2 py-3 text-sm font-medium rounded-md">
+          <i class="fas fa-cog text-gray-500 mr-3 text-lg"></i>
+          Settings
+        </a>
+      </nav>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 p-6">
+      <div class="mb-6 flex justify-between items-center">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900">My Notes</h1>
+          <p class="text-gray-600">Manage your uploaded notes and view their performance</p>
+        </div>
+        <a href="sell.html" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <i class="fas fa-plus mr-2"></i>
+          Upload New
+        </a>
+      </div>
+
+      <!-- Filters -->
+      <div class="bg-white shadow rounded-lg mb-6">
+        <div class="px-4 py-5 sm:p-6">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <!-- Status Filter -->
+            <div>
+              <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+              <select id="status" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                <option>All Statuses</option>
+                <option>Published</option>
+                <option>Pending Review</option>
+                <option>Rejected</option>
+                <option>Draft</option>
+              </select>
+            </div>
+
+            <!-- Subject Filter -->
+            <div>
+              <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+              <select id="subject" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                <option>All Subjects</option>
+                <option>Mathematics</option>
+                <option>Science</option>
+                <option>Literature</option>
+                <option>History</option>
+                <option>Business</option>
+              </select>
+            </div>
+
+            <!-- Date Filter -->
+            <div>
+              <label for="date" class="block text-sm font-medium text-gray-700 mb-1">Date Added</label>
+              <select id="date" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                <option>All Time</option>
+                <option>Last 7 Days</option>
+                <option>Last 30 Days</option>
+                <option>Last 90 Days</option>
+              </select>
+            </div>
+
+            <!-- Search -->
+            <div>
+              <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Search</label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <i class="fas fa-search text-gray-400"></i>
+                </div>
+                <input type="text" id="search" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Search notes...">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes Table -->
+      <div class="bg-white shadow rounded-lg overflow-hidden">
+        <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Your Notes
+          </h3>
+        </div>
+        <div class="divide-y divide-gray-200">
+          <!-- Note 1 -->
+          <div class="note-card px-4 py-4 sm:px-6 hover:bg-gray-50 transition-all duration-200">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-4">
+                <div class="flex-shrink-0 h-16 w-16 overflow-hidden rounded-md">
+                  <img class="h-full w-full object-cover" src="https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Calculus notes">
+                </div>
+                <div>
+                  <h4 class="text-sm font-medium text-gray-900">Calculus I Complete Notes</h4>
+                  <p class="text-sm text-gray-500">Mathematics</p>
+                  <div class="mt-1 flex items-center">
+                    <div class="flex items-center">
+                      <i class="fas fa-star text-yellow-400 text-xs"></i>
+                      <i class="fas fa-star text-yellow-400 text-xs"></i>
+                      <i class="fas fa-star text-yellow-400 text-xs"></i>
+                      <i class="fas fa-star text-yellow-400 text-xs"></i>
+                      <i class="fas fa-star-half-alt text-yellow-400 text-xs"></i>
+                      <span class="ml-1 text-xs text-gray-500">4.7 (42)</span>
+                    </div>
+                    <span class="mx-2 text-gray-300">•</span>
+                    <div class="text-xs text-gray-500">
+                      <i class="fas fa-shopping-cart mr-1"></i> 24 sales
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4">
+                <div class="text-right">
+                  <p class="text-sm font-medium text-gray-900">$12.99</p>
+                  <p class="text-xs text-gray-500">$10.39 earned</p>
+                </div>
+                <div class="relative dropdown">
+                  <button class="p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+                    <i class="fas fa-ellipsis-v"></i>
+                  </button>
+                  <div class="dropdown-content mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                    <div class="py-1">
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-pencil-alt mr-2"></i> Edit
+                      </a>
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-chart-line mr-2"></i> Stats
+                      </a>
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-ban mr-2"></i> Unpublish
+                      </a>
+                      <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+                        <i class="fas fa-trash mr-2"></i> Delete
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Note 2 -->
+          <div class="note-card px-4 py-4 sm:px-6 hover:bg-gray-50 transition-all duration-200">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-4">
+                <div class="flex-shrink-0 h-16 w-16 overflow-hidden rounded-md">
+                  <img class="h-full w-full object-cover" src="https://images.pexels.com/photos/414860/pexels-photo-414860.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Chemistry notes">
+                </div>
+                <div>
+                  <h4 class="text-sm font-medium text-gray-900">Organic Chemistry Notes</h4>
+                  <p class="text-sm text-gray-500">Science</p>
+                  <div class="mt-1 flex items-center">
+                    <div class="flex items-center">
+                      <i class="fas fa-star text-yellow-400 text-xs"></i>
+                      <i class="fas fa-star text-yellow-400 text-xs"></i>
+                      <i class="fas fa-star text-yellow-400 text-xs"></i>
+                      <i class="fas fa-star text-yellow-400 text-xs"></i>
+                      <i class="fas fa-star text-yellow-400 text-xs"></i>
+                      <span class="ml-1 text-xs text-gray-500">5.0 (28)</span>
+                    </div>
+                    <span class="mx-2 text-gray-300">•</span>
+                    <div class="text-xs text-gray-500">
+                      <i class="fas fa-shopping-cart mr-1"></i> 18 sales
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4">
+                <div class="text-right">
+                  <p class="text-sm font-medium text-gray-900">$15.50</p>
+                  <p class="text-xs text-gray-500">$12.40 earned</p>
+                </div>
+                <div class="relative dropdown">
+                  <button class="p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+                    <i class="fas fa-ellipsis-v"></i>
+                  </button>
+                  <div class="dropdown-content mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                    <div class="py-1">
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-pencil-alt mr-2"></i> Edit
+                      </a>
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-chart-line mr-2"></i> Stats
+                      </a>
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-ban mr-2"></i> Unpublish
+                      </a>
+                      <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+                        <i class="fas fa-trash mr-2"></i> Delete
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Note 3 -->
+          <div class="note-card px-4 py-4 sm:px-6 hover:bg-gray-50 transition-all duration-200">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-4">
+                <div class="flex-shrink-0 h-16 w-16 overflow-hidden rounded-md">
+                  <img class="h-full w-full object-cover" src="https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Literature notes">
+                </div>
+                <div>
+                  <h4 class="text-sm font-medium text-gray-900">American Literature 101</h4>
+                  <p class="text-sm text-gray-500">Literature</p>
+                  <div class="mt-1 flex items-center">
+                    <div class="flex items-center">
+                      <i class="fas fa-star text-yellow-400 text-xs"></i>
+                      <i class="fas fa-star text-yellow-400 text-xs"></i>
+                      <i class="fas fa-star text-yellow-400 text-xs"></i>
+                      <i class="fas fa-star text-yellow-400 text-xs"></i>
+                      <i class="far fa-star text-yellow-400 text-xs"></i>
+                      <span class="ml-1 text-xs text-gray-500">4.2 (35)</span>
+                    </div>
+                    <span class="mx-2 text-gray-300">•</span>
+                    <div class="text-xs text-gray-500">
+                      <i class="fas fa-shopping-cart mr-1"></i> 12 sales
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4">
+                <div class="text-right">
+                  <p class="text-sm font-medium text-gray-900">$9.99</p>
+                  <p class="text-xs text-gray-500">$7.99 earned</p>
+                </div>
+                <div class="relative dropdown">
+                  <button class="p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+                    <i class="fas fa-ellipsis-v"></i>
+                  </button>
+                  <div class="dropdown-content mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                    <div class="py-1">
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-pencil-alt mr-2"></i> Edit
+                      </a>
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-chart-line mr-2"></i> Stats
+                      </a>
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-ban mr-2"></i> Unpublish
+                      </a>
+                      <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+                        <i class="fas fa-trash mr-2"></i> Delete
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Note 4 (Pending Review) -->
+          <div class="note-card px-4 py-4 sm:px-6 hover:bg-gray-50 transition-all duration-200">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-4">
+                <div class="flex-shrink-0 h-16 w-16 overflow-hidden rounded-md">
+                  <img class="h-full w-full object-cover" src="https://images.pexels.com/photos/256455/pexels-photo-256455.jpeg?auto=compress&cs=tinysrgb&w=600" alt="History notes">
+                </div>
+                <div>
+                  <h4 class="text-sm font-medium text-gray-900">European History Since 1945</h4>
+                  <p class="text-sm text-gray-500">History</p>
+                  <div class="mt-1">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                      Pending Review
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4">
+                <div class="text-right">
+                  <p class="text-sm font-medium text-gray-900">$11.25</p>
+                  <p class="text-xs text-gray-500">$9.00 potential</p>
+                </div>
+                <div class="relative dropdown">
+                  <button class="p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+                    <i class="fas fa-ellipsis-v"></i>
+                  </button>
+                  <div class="dropdown-content mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                    <div class="py-1">
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-pencil-alt mr-2"></i> Edit
+                      </a>
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-eye mr-2"></i> Preview
+                      </a>
+                      <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+                        <i class="fas fa-trash mr-2"></i> Delete
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="px-4 py-4 sm:px-6 border-t border-gray-200">
+          <nav class="flex items-center justify-between">
+            <div class="flex-1 flex items-center justify-between">
+              <div>
+                <p class="text-sm text-gray-700">
+                  Showing <span class="font-medium">1</span> to <span class="font-medium">4</span> of <span class="font-medium">12</span> notes
+                </p>
+              </div>
+              <div>
+                <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                  <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                    <span class="sr-only">Previous</span>
+                    <i class="fas fa-chevron-left"></i>
+                  </a>
+                  <a href="#" aria-current="page" class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                    1
+                  </a>
+                  <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                    2
+                  </a>
+                  <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                    3
+                  </a>
+                  <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                    <span class="sr-only">Next</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </a>
+                </nav>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script>
+    // Load header and footer components
+    fetch('components/header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header').innerHTML = data;
+      });
+
+    fetch('components/footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer').innerHTML = data;
+      });
+
+    // Filter functionality
+    document.getElementById('search').addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      const noteCards = document.querySelectorAll('.note-card');
+      
+      noteCards.forEach(card => {
+        const title = card.querySelector('h4').textContent.toLowerCase();
+        const subject = card.querySelector('p').textContent.toLowerCase();
+        
+        if (title.includes(searchTerm) || subject.includes(searchTerm)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+
+    // Status filter
+    document.getElementById('status').addEventListener('change', function() {
+      const status = this.value;
+      const noteCards = document.querySelectorAll('.note-card');
+      
+      if (status === 'All Statuses') {
+        noteCards.forEach(card => {
+          card.style.display = 'block';
+        });
+        return;
+      }
+      
+      noteCards.forEach(card => {
+        const statusElement = card.querySelector('span.bg-yellow-100, span.bg-green-100');
+        let cardStatus = '';
+        
+        if (statusElement) {
+          if (statusElement.classList.contains('bg-yellow-100')) {
+            cardStatus = 'Pending Review';
+          } else if (statusElement.classList.contains('bg-green-100')) {
+            cardStatus = 'Published';
+          }
+        } else {
+          cardStatus = 'Published'; // Default status if no badge is present
+        }
+        
+        if (cardStatus === status) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
